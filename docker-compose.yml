@@ -1,0 +1,11 @@
+web:
+  image: nginx
+  ports:
+   - 80:80
+  volumes:
+   - "./:/usr/share/nginx/html"
+build:
+  build: .
+  command: /bin/true
+  volumes:
+   - ./:/code
