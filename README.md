@@ -1,11 +1,12 @@
 # aframe-jsnes
 An experiment to run a javascript Nintendo emulator inside of virtual reality with a-frame.
 
-[Try it out here](https://kfarr.github.io/aframe-jsnes/) (warning it takes a while to load all elements.)
+[Try it out here](https://kfarr.github.io/aframe-jsnes/) (warning it takes a while to load all elements.) Controls do NOT work, they are overriden by aframe's nav controls.
 
 <img src="https://kfarr.github.io/aframe-jsnes/assets/aframe-jsnes-screenshot.jpg" />
 
 Wishlist:
+* get controls working somehow
 * fix lighting, things look super ugly without better lighting. tv should be emitting glow
 * fix scale, things are too big
 * add more 80's nostalgia esp. to the back wall a la https://sketchfab.com/models/9583c76fa1b74dafaa0b8912a66613f8
