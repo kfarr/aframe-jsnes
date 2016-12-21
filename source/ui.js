@@ -35,7 +35,7 @@ if (typeof jQuery !== 'undefined') {
                 /*
                  * Create UI
                  */
-                self.root = $('<div></div>');
+                self.root = $('<div id="nesui"></div>');
 
                 var canvasEl = $("#nes-screen");
 
@@ -49,14 +49,14 @@ if (typeof jQuery !== 'undefined') {
                 }
 
                 self.romContainer = $('<div class="nes-roms"></div>').appendTo(self.root);
-                self.romSelect = $('<select></select>').appendTo(self.romContainer);
+                self.romSelect = $('<select id="romSelect" class="form-control"></select>').appendTo(self.romContainer);
 
                 self.controls = $('<div class="nes-controls"></div>').appendTo(self.root);
                 self.buttons = {
-                    pause: $('<input type="button" value="pause" class="nes-pause" disabled="disabled">').appendTo(self.controls),
-                    restart: $('<input type="button" value="restart" class="nes-restart" disabled="disabled">').appendTo(self.controls),
-                    sound: $('<input type="button" value="disable sound" class="nes-enablesound">').appendTo(self.controls),
-                    zoom: $('<input type="button" value="zoom in" class="nes-zoom">').appendTo(self.controls)
+                    pause: $('<input type="button" value="pause" class="nes-pause btn btn-xs btn-default" disabled="disabled">').appendTo(self.controls),
+                    restart: $('<input type="button" value="restart" class="nes-restart btn btn-xs btn-default" disabled="disabled">').appendTo(self.controls),
+                    sound: $('<input type="button" value="disable sound" class="nes-enablesound btn btn-xs btn-default">').appendTo(self.controls),
+                    zoom: $('<input type="button" value="zoom in" class="nes-zoom btn btn-xs btn-default">').appendTo(self.controls)
                 };
                 self.status = $('<p class="nes-status">Booting up...</p>').appendTo(self.root);
                 self.root.appendTo(parent);
