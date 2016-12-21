@@ -3,6 +3,8 @@ An experiment to run a javascript Nintendo emulator inside of virtual reality wi
 
 [Try it out here](https://kfarr.github.io/aframe-jsnes/) (warning it takes a while to load all elements.)
 
+<img src="https://kfarr.github.io/aframe-jsnes/assets/aframe-jsnes-screenshot.jpg" />
+
 Wishlist:
 * fix lighting, things look super ugly without better lighting. tv should be emitting glow
 * fix scale, things are too big
