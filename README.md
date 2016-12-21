@@ -2,13 +2,18 @@
 An experiment to run a javascript Nintendo emulator inside of virtual reality with a-frame
 
 Wishlist:
-* add tv
-* add background
-* era appropriate 80's background such as https://sketchfab.com/models/9583c76fa1b74dafaa0b8912a66613f8
+* fix lighting, things look ugly
+* fix scale, things are too big
+* add more 80's nostalgia esp. to the back wall a la https://sketchfab.com/models/9583c76fa1b74dafaa0b8912a66613f8
 * map nes controls to vive / oculus touch
 * allow user to choose alternate environment / backgrounds
 * allow switching of games from inside of vr using cartridges
 * multiplayer online
+
+Credits
+- Thanks to JonathanZWhite for the base of https://github.com/JonathanZWhite/bedroom-model which I modified a bit
+- JSNES code covered under GNU GENERAL PUBLIC LICENSE (below)
+- VR specific adaptation covered under MIT License
 
 ****
 
