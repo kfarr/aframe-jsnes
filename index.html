@@ -5,6 +5,11 @@
     <title>JSNES: A JavaScript NES emulator</title>
 </head>
 
+<!-- <script src="lib/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script> -->
+<script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://rawgit.com/donmccurdy/aframe-extras/v2.2.0/dist/aframe-extras.loaders.min.js"></script>
+
 <!-- for menu overlay -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
@@ -15,11 +20,11 @@
         position: absolute;
         top: 20px;
         left: 20px;
-        max-width: 280px;
+        max-width: 350px;
         box-sizing: border-box;
         padding: 1.5em;
         color: #FFF;
-        background: #222;
+        background: rgba(0, 0, 0, 0.75);
         font-family: Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
       }
       .menu-overlay {
@@ -44,20 +49,72 @@
 
 
 <body>
+  <a-scene>
+    <a-assets>
+      <canvas id="tvSnowCanvas" width="256" height="256"></canvas>
+      <canvas id="nes-screen" class="nes-screen" width="256" height="240"></canvas>
+      <a-asset-item id="nesRoomPly" src="assets/room-notv.bake.ply"></a-asset-item>
+      <a-asset-item id="tvNES" src="assets/tv-nes.bake.ply"></a-asset-item>
+      <img id="nightSky" src="assets/24564695173_4f8f0ab4ab_o.jpg">
+    </a-assets>
 
-    <a-scene>
-        <a-video src="#nes-screen" width="4" height="3" position="0 0 -5"></a-video>
-        <a-node></a-node> <!-- this is a hack to delay aframe from initiating -->
-        <a-sky color="#000"></a-sky>
-    </a-scene>
+    <a-entity id="cameraWrapper" rotation="0 180 0">
+      <a-entity id="camera" camera look-controls wasd-controls="fly: true" ></a-entity>
+    </a-entity>
 
-    <canvas id="nes-screen" class="nes-screen" width="256" height="240"></canvas>
-    <!-- <canvas id="js-canvas" class="canvas js-canvas" width="1440" height="900" ></canvas> -->
+    <a-video id="nesScreen" src="#nes-screen" width="4" height="3" position="1.25 -0.87 18.48" rotation="0 180 0" scale="0.92 0.92 0.92"></a-video>
+    <a-plane id="tvSnow" src="#tvSnowCanvas" width="4" height="3" position="1.25 -0.87 18.46" rotation="0 180 0" scale="0.92 0.92 0.92"></a-plane>
+    <!-- rotation was -90 0 130 -->
 
-    <div id="bloc" class="intro-overlay">
-      <h1>JSNES</h1>
+    <a-plane id="backWall" color="black" width="20" height="20" position="1.25 -0.89 22" rotation="0 180 0" scale="1.32 1.40 1"></a-plane>
+    <a-plane id="ceiling" color="black" width="20" height="20" position="0.86 12.71 6.44" rotation="90 180 0" scale="1.32 1.68 1"></a-plane>
+
+    <a-entity ply-model="src: #nesRoomPly" position="1 -4 6.5" scale=".25 .25 .25" rotation="-90 0 0"></a-entity>
+    <a-entity ply-model="src: #tvNES" position="-1.5 -3.5 19.5" scale=".25 .25 .25" rotation="-90 0 0"></a-entity>
+    <a-sky src="#nightSky" rotation="0 -208 0"></a-sky>
+  </a-scene>
+
+<!-- tv snow http://jsfiddle.net/AbdiasSoftware/dEya9/ http://stackoverflow.com/questions/22003491/animating-canvas-to-look-like-tv-noise -->
+
+<script>
+    var canvas = document.getElementById('tvSnowCanvas'),
+    ctx = canvas.getContext('2d');
+
+    function noise(ctx) {
+
+      var w = ctx.canvas.width,
+          h = ctx.canvas.height,
+          idata = ctx.createImageData(w, h),
+          buffer32 = new Uint32Array(idata.data.buffer),
+          len = buffer32.length,
+          i = 0;
+
+      for(; i < len;)
+          buffer32[i++] = ((255 * Math.random())|0) << 24;
+
+      ctx.putImageData(idata, 0, 0);
+    }
+
+    var toggle = true;
+
+    // added toggle to get 30 FPS instead of 60 FPS
+    (function loop() {
+        toggle = !toggle;
+        if (toggle) {
+            requestAnimationFrame(loop);
+            return;
+        }
+        noise(ctx);
+        requestAnimationFrame(loop);
+    })();
+
+</script>
+
+
+    <div id="bloc" class="img-rounded intro-overlay">
+      <h4><strong>A-Frame JSNES</strong></h4>
       <div id="emulator"></div>
-      <h2>Controls</h2>
+      <h4>Controls</h4>
       <table id="controls">
           <tr>
               <th>Button</th>
@@ -106,7 +163,6 @@
       </table>
     </div>
 
-    <script src="lib/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="lib/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>
     <script src="source/nes.js" type="text/javascript" charset="utf-8"></script>
     <script src="source/utils.js" type="text/javascript" charset="utf-8"></script>
@@ -123,12 +179,11 @@
             nes = new JSNES({
                 'ui': $('#emulator').JSNESUI({
                     "Homebrew": [
-                        ['Concentration Room', 'roms/croom/croom.nes'],
                         ['LJ65', 'roms/lj65/lj65.nes'],
+                        ['Concentration Room', 'roms/croom/croom.nes']
                     ],
                     "Working": [
                         ['Bubble Bobble', 'local-roms/Bubble Bobble (U).nes'],
-
                         ['Contra', 'local-roms/Contra (U) [!].nes'],
                         ['Donkey Kong', 'local-roms/Donkey Kong (JU).nes'],
                         ['Dr. Mario', 'local-roms/Dr. Mario (JU).nes'],
@@ -136,7 +191,6 @@
                         ['The Legend of Zelda', 'local-roms/Legend of Zelda, The (U) (PRG1).nes'],
                         ['Lemmings', 'local-roms/Lemmings (U).nes'],
                         ['Lifeforce', 'local-roms/Lifeforce (U).nes'],
-
                         ['Mario Bros.', 'local-roms/Mario Bros. (JU) [!].nes'],
                         ['Mega Man', 'local-roms/Mega Man (U).nes'],
                         ['Pac-Man', 'local-roms/Pac-Man (U) [!].nes'],
@@ -146,7 +200,6 @@
                         ['Tetris 2', 'local-roms/Tetris 2 (U) [!].nes'],
                         ['Zelda II - The Adventure of Link', 'local-roms/Zelda II - The Adventure of Link (U).nes']
                     ],
-
                     "Nearly Working": [
                         ['Duck Hunt', 'local-roms/Duck Hunt (JUE) [!].nes'],
                         ['Super Mario Bros. 3', 'local-roms/Super Mario Bros. 3 (U) (PRG1) [!].nes']
@@ -155,16 +208,24 @@
             });
         });
     </script>
-    <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
-    <script type="text/javascript" charset="utf-8">
-      // setTimeout(function () {
-          document.querySelector('a-node').load(); // this instantiates aframe
-      // }, 5000);
-    </script>
 
-    <!--[if IE]>
-        <script type="text/vbscript" src="source/jsnes-ie-hacks.vbscript"></script>
-    <![endif]-->
+    <script type="text/javascript" charset="utf-8">
+
+      var scene = document.querySelector('a-scene');
+      if (scene.hasLoaded) {
+        run();
+      } else {
+        scene.addEventListener('loaded', run);
+      }
+      function run () {
+        setTimeout(function(){ // wait a few seconds before loading a rom, yes this is ghetto
+          $("#romSelect")[0].value = "roms/lj65/lj65.nes";
+          nes.ui.loadROM();
+          $("#tvSnow").remove();
+        }, 5000);
+      }
+
+    </script>
 
 </body>
 </html>
