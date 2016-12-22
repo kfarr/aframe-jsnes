@@ -6,7 +6,13 @@ An experiment to run a javascript Nintendo emulator inside of virtual reality wi
 <img src="https://kfarr.github.io/aframe-jsnes/assets/aframe-jsnes-screenshot.jpg" />
 
 Wishlist:
-* get controls working somehow
+* try different nes js engine https://github.com/koenkivits/nesnes
+* get controls working somehow:
+** https://github.com/donmccurdy/aframe-gamepad-controls
+** https://github.com/bwiklund/gamepad.js
+** https://github.com/thinkpixellab/PxGamepad?WT.mc_id=14131-DEV-tuts-article22
+** https://gamedevelopment.tutsplus.com/tutorials/simple-xbox-controller-input-in-html5-with-pxgamepad--cms-24585
+** http://www.flightarcade.com/learn/gamepad
 * fix lighting, things look super ugly without better lighting. tv should be emitting glow
 * fix scale, things are too big
 * add more 80's nostalgia esp. to the back wall a la https://sketchfab.com/models/9583c76fa1b74dafaa0b8912a66613f8
