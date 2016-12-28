@@ -1,13 +1,13 @@
 # aframe-jsnes
 An experiment to run a javascript Nintendo emulator inside of virtual reality with a-frame.
 
-[Try it out here](https://kfarr.github.io/aframe-jsnes/) (warning it takes a while to load all elements.) Controls do NOT work, they are overriden by aframe's nav controls.
+[Try it out here](https://kfarr.github.io/aframe-jsnes/) (warning it takes a while to load all elements.)
 
 <img src="https://kfarr.github.io/aframe-jsnes/assets/aframe-jsnes-screenshot.jpg" />
 
 Wishlist:
 * try different nes js engine https://github.com/koenkivits/nesnes
-* get controls working somehow:
+* get add'l controls besides keyboard working somehow:
 ** https://github.com/donmccurdy/aframe-gamepad-controls
 ** https://github.com/bwiklund/gamepad.js
 ** https://github.com/thinkpixellab/PxGamepad?WT.mc_id=14131-DEV-tuts-article22
