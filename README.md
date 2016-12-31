@@ -1,9 +1,17 @@
 # aframe-jsnes
 An experiment to run a javascript Nintendo emulator inside of virtual reality with a-frame.
 
-[Try it out here](https://kfarr.github.io/aframe-jsnes/) (warning it takes a while to load all elements.)
-
+# Demo 1:
+<a href="https://kfarr.github.io/aframe-jsnes/">
+Click here to try it out here, 8-bit environment.
 <img src="https://kfarr.github.io/aframe-jsnes/assets/aframe-jsnes-screenshot.jpg" />
+</a>
+
+# Demo 2:
+<a href="https://kfarr.github.io/aframe-jsnes/arcade.html">
+Click here to try it out -- same thing just different environment with arcade case.
+<img src="https://kfarr.github.io/aframe-jsnes/assets/arcade-screenshot.jpg" />
+</a>
 
 Wishlist:
 * try different nes js engine https://github.com/koenkivits/nesnes
