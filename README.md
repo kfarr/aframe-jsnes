@@ -36,3 +36,4 @@ Credits
 - Thanks to JonathanZWhite for the base of https://github.com/JonathanZWhite/bedroom-model which I modified a bit
 - JSNES code covered under GNU GENERAL PUBLIC LICENSE (see license file)
 - VR specific adaptation covered under MIT License
+- SNES cabinet by arthur_felipe from https://sketchfab.com/models/ad2c2c6fa1d24f569eb0e35c064bf05a#
